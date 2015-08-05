@@ -1,3 +1,9 @@
+## assume that the source data file is in the current diretory.
+##
+
+#cons = read.table('household_power_consumption.txt', colClasses = 'character', nrows=1000, sep=';', header = T)
+cons = read.table('household_power_consumption.txt', colClasses = c('character','character',rep('character',7)), sep=';', header = T)
+
 cons$d = as.Date((cons$Date), '%d/%m/%Y' )
 d.filter = as.Date(c('2007-02-01','2007-02-02'))
 
@@ -17,8 +23,10 @@ cons.work$Sub_metering_1 = as.numeric(cons.work$Sub_metering_1)
 cons.work$Sub_metering_2 = as.numeric(cons.work$Sub_metering_2)
 cons.work$Sub_metering_3 = as.numeric(cons.work$Sub_metering_3)
 
+
 # Plot 4
 
+png(filename = 'Plot1.png', width = 480, height = 480, units = 'px')
 par(mfcol=c(2,2))
 
 ##1
@@ -38,3 +46,4 @@ plot( (cons.work$dt), cons.work$Global_reactive_power, type='l', ylab = 'Global_
 
 dev.copy(png, 'Plot4.png', width = 480, height = 480, units ='px')
 dev.off()
+

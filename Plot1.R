@@ -1,3 +1,9 @@
+## assume that the source data file is in the current diretory.
+##
+
+#cons = read.table('household_power_consumption.txt', colClasses = 'character', nrows=1000, sep=';', header = T)
+cons = read.table('household_power_consumption.txt', colClasses = c('character','character',rep('character',7)), sep=';', header = T)
+
 cons$d = as.Date((cons$Date), '%d/%m/%Y' )
 d.filter = as.Date(c('2007-02-01','2007-02-02'))
 

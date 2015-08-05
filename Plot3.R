@@ -1,3 +1,9 @@
+## assume that the source data file is in the current diretory.
+##
+
+#cons = read.table('household_power_consumption.txt', colClasses = 'character', nrows=1000, sep=';', header = T)
+cons = read.table('household_power_consumption.txt', colClasses = c('character','character',rep('character',7)), sep=';', header = T)
+
 cons$d = as.Date((cons$Date), '%d/%m/%Y' )
 d.filter = as.Date(c('2007-02-01','2007-02-02'))
 
@@ -20,7 +26,10 @@ cons.work$Sub_metering_3 = as.numeric(cons.work$Sub_metering_3)
 par(mfrow=c(1,1))
 par(mfcol=c(1,1))
 
+
 #Plot 3
+
+png(filename = 'Plot1.png', width = 480, height = 480, units = 'px')
 
 plot( cons.work$dt, cons.work$Sub_metering_1, type='n', ylab = 'Energy sub metering', xlab ='')
 
@@ -29,6 +38,6 @@ points( cons.work$dt, cons.work$Sub_metering_2, type='l', col = 'red')
 points( cons.work$dt, cons.work$Sub_metering_3, type='l', col = 'blue')
 legend('topright', col = c('black', 'red', 'blue'), legend = c('Sub_metering_1','Sub_metering_2','Sub_metering_3'), lty= 1)
 
-dev.copy(png, 'Plot3.png', width = 480, height = 480, units ='px')
 dev.off()
+
 
